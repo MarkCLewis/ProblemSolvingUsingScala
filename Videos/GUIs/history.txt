@@ -1,0 +1,5 @@
+Abstract Windowing Toolkit - AWT
+Swing = scala.swing
+
+JavaFX
+ScalaFX

@@ -1,0 +1,6 @@
+This is a test. Stuff at the end of the line.
+A line instead.
+
+A new line instead. Stuff at the end of the line.
+Save start.
+Save this. Stuff at the start of the line.

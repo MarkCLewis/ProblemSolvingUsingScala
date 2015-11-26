@@ -1,0 +1,16 @@
+Make a PB&J sandwich
+ - Get Ingredients
+   - Get pantry items
+     - Walk to pantry
+     - Grab peanut butter and bread
+   - Get fridge items
+   - Get other items
+ - Assemble Ingredients
+   - Get out bread
+   - Put bread on plate
+   - Spread peanut butter
+     - Open beanut butter
+     - Until bread is covered
+       - get peanut butter on knife
+       - spread peanut butter on bread
+ - Clean Up

@@ -1,0 +1,28 @@
+<!-- grades for a class -->
+<gradebook>
+	<courseName>CS1</courseName>
+	<student fname="John" lname="Doe">
+		<quiz grade="88"/>
+		<quiz grade="73"/>
+		<quiz grade="95"/>
+		<assignment grade="82">Poor indentation.</assignment>
+		<assignment grade="67">Doesn&apos;t really solve the problem.</assignment>
+		<test grade="98"/>
+	</student>
+	<student fname="Jane" lname="Doe">
+		<quiz grade="95"/>
+		<quiz grade="84"/>
+		<quiz grade="90"/>
+		<assignment grade="84">Poor indentation.</assignment>
+		<assignment grade="93">Generally well done.</assignment>
+		<test grade="100"/>
+	</student>
+	<student fname="Bob" lname="Builder">
+		<quiz grade="66"/>
+		<quiz grade="93"/>
+		<quiz grade="82"/>
+		<assignment grade="92"></assignment>
+		<assignment grade="74"></assignment>
+		<test grade="100"/>
+	</student>
+</gradebook>

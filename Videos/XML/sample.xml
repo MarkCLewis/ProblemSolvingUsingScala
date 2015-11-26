@@ -1,0 +1,12 @@
+<data>
+	<person fname="John" lname="Doe">
+		<phone type="mobile" number="123-456-7890"/>
+	</person>
+	3 &lt; 5
+	&gt;
+	&amp;
+	&apos;
+	&quot;
+	Plain text
+	<empty/>
+</data>
