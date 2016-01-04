@@ -18,8 +18,8 @@ val app = new JFXApp {
 
       content = List(label, slider)
 
-      label.layoutX <== when (slider.value < 50) choose 0 otherwise scene.width-label.width
-      label.layoutY <== (scene.height-label.height)/2
+      label.layoutX <== when (slider.value < 50) choose 0 otherwise width-label.width
+      label.layoutY <== (height-label.height)/2
       fill <== when (label.hover) choose Color.Red otherwise Color.White
     }
   }

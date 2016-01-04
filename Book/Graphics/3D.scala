@@ -36,7 +36,7 @@ val app = new JFXApp {
       val usePerspective = new CheckBox("Perspective View")
       usePerspective.layoutY = 270
       usePerspective.onAction = (e:ActionEvent) => {
-        if(usePerspective.selected.value) {
+        if (usePerspective.selected.value) {
           camera = new PerspectiveCamera(false)
         } else {
           camera = new ParallelCamera
@@ -46,7 +46,7 @@ val app = new JFXApp {
       val useTexture = new CheckBox("Texture Sphere")
       useTexture.layoutY = 300
       useTexture.onAction = (e:ActionEvent) => {
-        if(useTexture.selected.value) {
+        if (useTexture.selected.value) {
           sphereMaterial.diffuseMap = marsImage
           sphereMaterial.diffuseColor = Color.White
         } else {

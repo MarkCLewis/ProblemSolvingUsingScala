@@ -39,24 +39,24 @@ val app = new JFXApp {
       content = List(label, textField, textArea, passwordField)
 
       textField.onAction = (e:ActionEvent) => {
-        label.text = "Field action : "+textField.text.apply
+        label.text = "Field action : "+textField.text.value
       }
       textField.focused.onChange {
-        if(!textField.focused.apply) label.text = 
-          "Field focus : "+textField.text.apply
+        if (!textField.focused.value) label.text = 
+          "Field focus : "+textField.text.value
       }
 
       textArea.focused.onChange {
-        if(!textArea.focused.apply) label.text = 
-          "Area focus : "+textArea.text.apply
+        if (!textArea.focused.value) label.text = 
+          "Area focus : "+textArea.text.value
       }
 
       passwordField.onAction = (e:ActionEvent) => {
-        label.text = "Password action : "+passwordField.text.apply
+        label.text = "Password action : "+passwordField.text.value
       }
       passwordField.focused.onChange {
-        if(!passwordField.focused.apply) label.text = 
-          "Password focus : "+passwordField.text.apply
+        if (!passwordField.focused.value) label.text = 
+          "Password focus : "+passwordField.text.value
       }
     }
   }

@@ -34,8 +34,8 @@ val app = new JFXApp {
 
       root = table
 
-      table.selectionModel.apply.selectedItem.onChange(
-        println("Selected " + table.selectionModel.apply.getSelectedItems)
+      table.selectionModel.value.selectedItem.onChange(
+        println("Selected " + table.selectionModel.value.selectedItem.value)
       )
     }
   }

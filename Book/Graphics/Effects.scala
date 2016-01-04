@@ -9,11 +9,11 @@ import scalafx.scene.text._
 def makeText(x:Double, y:Double, s:String, effect:Effect, darkBack:Boolean):Node = {
   val text = new Text(x, y, s)
   text.font = Font("serif", FontWeight.Bold, 40)
-  text.fill = if(darkBack) Color.White else Color.Black
+  text.fill = if (darkBack) Color.White else Color.Black
   text.effect = effect
-  if(darkBack) {
+  if (darkBack) {
     val group = new Group
-    val b = text.boundsInLocal.apply
+    val b = text.boundsInLocal.value
     val r = Rectangle(b.minX, b.minY, b.width, b.height)
     r.fill = Color.Black
     group.children = List(r, text)
@@ -30,9 +30,9 @@ val app = new JFXApp {
       val bloom = makeText(20, 40, "Bloom", new Bloom(0.1), true)
       val boxBlur = makeText(20, 100, "BoxBlur", new BoxBlur(7, 7, 2), false)
       val floatMap = new FloatMap(400, 40)
-      for(i <- 0 until floatMap.width.apply;
+      for (i <- 0 until floatMap.width.value;
           offset = (0.1*math.sin(i/30.0)).toFloat;
-          j <- 0 until floatMap.height.apply) {
+          j <- 0 until floatMap.height.value) {
         floatMap.setSamples(i, j, 0.0f, offset)
       }
       val dMap = new DisplacementMap(floatMap)

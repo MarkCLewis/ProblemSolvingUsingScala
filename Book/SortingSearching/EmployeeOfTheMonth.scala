@@ -20,10 +20,10 @@ def readData(fileName:String):Array[DailyData] = {
 }
 
 def insertionSortByEfficiency(a:Array[OperatorEfficiencyFactor]):Unit = {
-  for(j <- 1 until a.length) {
+  for (j <- 1 until a.length) {
     var i=j-1
     val tmp=a(j)
-    while(i>=0 && a(i).factor>tmp.factor) {
+    while (i>=0 && a(i).factor>tmp.factor) {
       a(i+1) = a(i)
       i -= 1
     }
@@ -33,24 +33,24 @@ def insertionSortByEfficiency(a:Array[OperatorEfficiencyFactor]):Unit = {
 
 val data = readData(args(0))
 val rides = data.map(_.ride).distinct
-val averages = for(ride <- rides) yield {
+val averages = for (ride <- rides) yield {
   val days = data.filter(_.ride==ride)
   RideAverage(ride, days.map(_.numRiders).sum.toDouble/days.length)
 }
-val dataByOperator = for(day <- data; op <- day.operators) yield {
+val dataByOperator = for (day <- data; op <- day.operators) yield {
   OperatorDailyData(op, day.ride, day.numRiders)
 }
 val operators = dataByOperator.map(_.name).distinct
-val opRideAverages = for(op <- operators) yield {
+val opRideAverages = for (op <- operators) yield {
   val opDays = dataByOperator.filter(_.name == op)
-  val rideAvs = for(ride <- rides; if opDays.exists(_.ride==ride)) yield {
+  val rideAvs = for (ride <- rides; if opDays.exists(_.ride==ride)) yield {
     val opRides = opDays.filter(_.ride == ride)
     RideAverage(ride, opRides.map(_.numRiders).sum.toDouble/opRides.length)
   }
   OperatorRideAverages(op, rideAvs)
 }
-val operatorFactors = for(OperatorRideAverages(op, rideAvs) <- opRideAverages) yield {
-  val factors = for(RideAverage(ride,av) <- rideAvs) yield {
+val operatorFactors = for (OperatorRideAverages(op, rideAvs) <- opRideAverages) yield {
+  val factors = for (RideAverage(ride,av) <- rideAvs) yield {
     av/averages.filter(_.ride==ride).head.avNum
   }
   OperatorEfficiencyFactor(op,factors.sum/factors.length)

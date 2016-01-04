@@ -30,11 +30,11 @@ val app = new JFXApp {
       content = List(label, colorPicker, datePicker)
 
       colorPicker.onAction = (e:ActionEvent) => {
-        fill = colorPicker.value.apply
+        fill = colorPicker.value.value
       }
 
       datePicker.onAction = (e:ActionEvent) => {
-        label.text = "Date is : " + datePicker.value.apply
+        label.text = "Date is : " + datePicker.value.value
       }
     }
   }

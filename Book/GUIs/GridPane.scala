@@ -10,7 +10,7 @@ val app = new JFXApp {
     title = "GridPane"
     scene = new Scene(300,300) {
       val gridPane = new GridPane
-      for(i <- 1 to 9) {
+      for (i <- 1 to 9) {
         val button = new Button(i.toString)
         gridPane.children += button
         GridPane.setColumnIndex(button, (i-1)%3)

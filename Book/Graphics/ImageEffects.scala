@@ -7,7 +7,7 @@ import scalafx.scene.effect._
 import scalafx.scene.control._
 import scalafx.event.ActionEvent
 
-if(args.length < 1) {
+if (args.length < 1) {
   println("You must provide arguments with the names of files to load.")
   sys.exit(0)
 }
@@ -16,7 +16,7 @@ val app = new JFXApp {
   stage = new JFXApp.PrimaryStage {
     scene = new Scene(680,420) {
       val tilePane = new TilePane
-      for(file <- args) {
+      for (file <- args) {
         val img = new Image("file:"+file, 300, 200, true, true)
         val view = new ImageView(img)
         val colorAdjust = new MenuItem("Color Adjust")

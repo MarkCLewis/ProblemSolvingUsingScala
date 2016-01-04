@@ -33,10 +33,10 @@ object Game {
 
           onKeyPressed = (e:KeyEvent) => {
             e.code match {
-              case KeyCode.LEFT => maze.player.goLeft
-              case KeyCode.RIGHT => maze.player.goRight
-              case KeyCode.UP => maze.player.goUp
-              case KeyCode.DOWN => maze.player.goDown
+              case KeyCode.Left => maze.player.goLeft
+              case KeyCode.Right => maze.player.goRight
+              case KeyCode.Up => maze.player.goUp
+              case KeyCode.Down => maze.player.goDown
               case _ =>
             }
           }

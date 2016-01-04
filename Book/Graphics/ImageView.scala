@@ -6,7 +6,7 @@ import scalafx.scene.control.Label
 import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
 
-if(args.length < 1) {
+if (args.length < 1) {
   println("You must provide an argument with the name of a file to load.")
   sys.exit(0)
 }
@@ -23,7 +23,7 @@ val app = new JFXApp {
           val gwriter = gimg.pixelWriter
           val bimg = new WritableImage(original.width.value.toInt, original.height.value.toInt)
           val bwriter = bimg.pixelWriter
-          for(i <- 0 until original.width.value.toInt; 
+          for (i <- 0 until original.width.value.toInt; 
               j <- 0 until original.height.value.toInt) {
             val c = reader.getColor(i, j)
             rwriter.setColor(i, j, Color(c.red, 0, 0, 1.0))

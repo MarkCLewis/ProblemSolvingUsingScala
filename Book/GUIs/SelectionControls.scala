@@ -36,15 +36,15 @@ val app = new JFXApp {
       content = List(label, choiceBox, comboBox, listView)
 
       choiceBox.value.onChange {
-        label.text = "Choice selected : " + choiceBox.value.apply
+        label.text = "Choice selected : " + choiceBox.value.value
       }
 
       comboBox.onAction = (e:ActionEvent) => {
-        label.text = "Combo box selected : " + comboBox.value.apply
+        label.text = "Combo box selected : " + comboBox.value.value
       }
 
-      listView.selectionModel.apply.selectedItem.onChange {
-        label.text = "List view selected : " + listView.selectionModel.apply.getSelectedItems
+      listView.selectionModel.value.selectedItem.onChange {
+        label.text = "List view selected : " + listView.selectionModel.value.selectedItem.value
       }
     }
   }

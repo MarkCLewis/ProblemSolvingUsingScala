@@ -39,17 +39,17 @@ val app = new JFXApp {
 
       // Add event handlers
       button.onAction = (e:ActionEvent) => {
-        val selected = listView.selectionModel.apply.getSelectedItems
-        listView.items = listView.items.apply.diff(selected)
+        val selected = listView.selectionModel.value.selectedItems
+        listView.items = listView.items.value.diff(selected)
       }
       comboBox.onAction = (e:ActionEvent) => {
-        listView.items.apply += comboBox.selectionModel.apply.getSelectedItem
+        listView.items.value += comboBox.selectionModel.value.selectedItem.value
       }
       onMouseClicked = (e:MouseEvent) => {
-        if(checkBox.selected.apply) {
+        if (checkBox.selected.value) {
           rectangle.layoutX = e.x
           rectangle.layoutY = e.y
-          label.text = s"Location is ${rectangle.layoutX.apply}, ${rectangle.layoutY.apply}."
+          label.text = s"Location is ${rectangle.layoutX.value}, ${rectangle.layoutY.value}."
         }
       }
     }

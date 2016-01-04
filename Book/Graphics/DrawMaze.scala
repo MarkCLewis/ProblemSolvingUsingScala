@@ -20,20 +20,20 @@ val app = new JFXApp {
 
       onKeyPressed = (e:KeyEvent) => {
 				println("Pressed")
-        val oldX = ball.centerX.apply
-        val oldY = ball.centerY.apply
-        if(e.code == KeyCode.UP) ball.centerY = ball.centerY.apply - 2
-        if(e.code == KeyCode.DOWN) ball.centerY = ball.centerY.apply + 2
-        if(e.code == KeyCode.LEFT) ball.centerX = ball.centerX.apply - 2
-        if(e.code == KeyCode.RIGHT) ball.centerX = ball.centerX.apply + 2
+        val oldX = ball.centerX.value
+        val oldY = ball.centerY.value
+        if (e.code == KeyCode.Up) ball.centerY = ball.centerY.value - 2
+        if (e.code == KeyCode.Down) ball.centerY = ball.centerY.value + 2
+        if (e.code == KeyCode.Left) ball.centerX = ball.centerX.value - 2
+        if (e.code == KeyCode.Right) ball.centerX = ball.centerX.value + 2
 
         // Collision detection with walls
         val clear = walls.forall(shape => {
-          Shape.intersect(ball,shape).boundsInLocal.apply.isEmpty
+          Shape.intersect(ball,shape).boundsInLocal.value.isEmpty
         })
 
         // If it collided, go back to old location
-        if(!clear) {
+        if (!clear) {
           ball.centerX = oldX
           ball.centerY = oldY
         }

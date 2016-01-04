@@ -24,9 +24,9 @@ def ack(m:BigInt,n:BigInt,memo:mutable.Map[(BigInt,BigInt),BigInt]):BigInt = (m,
 }
 
 def bigPow(x:BigInt,y:BigInt):BigInt = {
-  if(y==0) 1
-  else if(y==1) x
-  else (if(y%2==1) x else One)*bigPow(x*x,y/2)
+  if (y==0) 1
+  else if (y==1) x
+  else (if (y%2==1) x else One)*bigPow(x*x,y/2)
 }
 
 def ack(m:BigInt,n:BigInt,memo:mutable.Buffer[mutable.Buffer[BigInt]]):BigInt = (m,n) match {
@@ -36,33 +36,33 @@ def ack(m:BigInt,n:BigInt,memo:mutable.Buffer[mutable.Buffer[BigInt]]):BigInt = 
   case (Three,n) => 
     8*bigPow(2,n)-3
   case (m,Zero) =>
-    if(memo.length<m+1) {
+    if (memo.length<m+1) {
       memo.padTo(m.toInt+1,mutable.Buffer())
       memo(m.toInt) += ack(m-1,1,memo)
       memo(m.toInt)(0)
     } else memo(m.toInt)(0)
   case (m,n) =>
-    if(memo.length<m+1) {
+    if (memo.length<m+1) {
       memo.padTo(m.toInt+1,mutable.Buffer())
     }
     Zero
     
 }
 /*
-for(n <- 4 to 0 by -1) {
-  for(m <- 0 to 3) print(ack(m,n)+" ")
+for (n <- 4 to 0 by -1) {
+  for (m <- 0 to 3) print(ack(m,n)+" ")
   println
 }
 
 val memo = mutable.Map[(BigInt,BigInt),BigInt]()
-for(n <- 0 to 4) {
-  for(m <- 0 to 4) print(ack(m,n,memo)+" ")
+for (n <- 0 to 4) {
+  for (m <- 0 to 4) print(ack(m,n,memo)+" ")
   println
 }
 
 val memo2 = mutable.Buffer(mutable.Buffer[BigInt]())
-for(n <- 4 to 0 by -1) {
-  for(m <- 0 to 3) print(ack(m,n,memo2)+" ")
+for (n <- 4 to 0 by -1) {
+  for (m <- 0 to 3) print(ack(m,n,memo2)+" ")
   println
 }
 */

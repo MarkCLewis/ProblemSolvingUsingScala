@@ -74,27 +74,27 @@ var rideInfo = (xmlData \ "ride").map(parseRideData).toList
 var employeeInfo = (xmlData \ "employee").map(parseEmployeeData).toList
 
 def buildWeeklySchedules:Unit = {
-  val daysInfo = for(y <- years; m <- y.months; d <- m.days) yield d
+  val daysInfo = for (y <- years; m <- y.months; d <- m.days) yield d
   val days = daysInfo.map(_.dayOfWeek).distinct
-  for(day <- days) {
+  for (day <- days) {
     val thisDay = daysInfo.filter(_.dayOfWeek==day)
     val rides = thisDay.map(_.ride).distinct
     val operatorRides = rides.flatMap(ride => {
       val nums = thisDay.filter(_.ride==ride).map(_.numRiders)
       val avg = nums.sum/nums.length
       val rideData = rideInfo.find(_.name==ride).get
-      Array.fill(rideData.numberOfOperators+(if(avg>=rideData.heavyCount) 1 else 0))(ride)
+      Array.fill(rideData.numberOfOperators+(if (avg>=rideData.heavyCount) 1 else 0))(ride)
     })
     val totalOps = operatorRides.length
-    for(choice <- employeeInfo.combinations(totalOps)) {
+    for (choice <- employeeInfo.combinations(totalOps)) {
       val perms = operatorRides.permutations
       var works = false
-      while(!works && perms.hasNext) {
+      while (!works && perms.hasNext) {
         val perm = perms.next
-        if((perm,choice).zipped.forall((r,op) => op.rides.contains(r)))
+        if ((perm,choice).zipped.forall((r,op) => op.rides.contains(r)))
           works = true
       }
-      if(works) {
+      if (works) {
         println(day+" - "+choice.map(_.name).mkString(", "))
       }
     }
@@ -107,10 +107,10 @@ case class OperatorRideAverages(name:String, rideAvs:List[RideAverage])
 case class OperatorEfficiencyFactor(name:String,factor:Double)
 
 def insertionSortByEfficiency(a:Array[OperatorEfficiencyFactor]):Unit = {
-  for(j <- 1 until a.length) {
+  for (j <- 1 until a.length) {
     var i = j-1
     val tmp = a(j)
-    while(i>=0 && a(i).factor>tmp.factor) {
+    while (i>=0 && a(i).factor>tmp.factor) {
       a(i+1) = a(i)
       i -= 1
     }
@@ -120,24 +120,24 @@ def insertionSortByEfficiency(a:Array[OperatorEfficiencyFactor]):Unit = {
 
 def rankEmployees(data:List[DayData]):Array[OperatorEfficiencyFactor] = {
   val rides = data.map(_.ride).distinct
-  val averages = for(ride <- rides) yield {
+  val averages = for (ride <- rides) yield {
     val days = data.filter(_.ride==ride)
     RideAverage(ride, days.map(_.numRiders).sum.toDouble/days.length)
   }
-  val dataByOperator = for(day <- data; op <- day.operators) yield {
+  val dataByOperator = for (day <- data; op <- day.operators) yield {
     OperatorDailyData(op, day.ride, day.numRiders)
   }
   val operators = dataByOperator.map(_.name).distinct
-  val opRideAverages = for(op <- operators) yield {
+  val opRideAverages = for (op <- operators) yield {
     val opDays = dataByOperator.filter(_.name == op)
-    val rideAvs = for(ride <- rides; if opDays.exists(_.ride==ride)) yield {
+    val rideAvs = for (ride <- rides; if opDays.exists(_.ride==ride)) yield {
       val opRides = opDays.filter(_.ride == ride)
       RideAverage(ride, opRides.map(_.numRiders).sum.toDouble/opRides.length)
     }
     OperatorRideAverages(op, rideAvs)
   }
-  val operatorFactors = (for(OperatorRideAverages(op, rideAvs) <- opRideAverages) yield {
-    val factors = for(RideAverage(ride,av) <- rideAvs) yield {
+  val operatorFactors = (for (OperatorRideAverages(op, rideAvs) <- opRideAverages) yield {
+    val factors = for (RideAverage(ride,av) <- rideAvs) yield {
       av/averages.filter(_.ride==ride).head.avNum
     }
     OperatorEfficiencyFactor(op,factors.sum/factors.length)
@@ -156,7 +156,7 @@ def inputDay:List[DayData] = {
   println("What day of the week is this for?")
   val dow = readLine()
   println("For each ride displayed, enter the number of riders for the day followed by employee numbers from this list with spaces in between.")
-  for(ri <- rideInfo; 
+  for (ri <- rideInfo; 
       val input = rideInput(ri)
       if input.head.toInt>=0) yield {
     DayData(ri.name, dow, input.tail.map(_.toInt).map(employeeInfo).map(_.name), input.head.toInt)
@@ -168,13 +168,13 @@ def inputRideDayData:Unit = {
   readLine().trim.split("/") match {
     case Array(monthText, yearText) =>
       val (month, year) = (monthText.toInt, yearText.toInt)
-      if(years.exists(_.year==year)) {
-        years = for(y <- years) yield {
-          if(y.year==year) {
+      if (years.exists(_.year==year)) {
+        years = for (y <- years) yield {
+          if (y.year==year) {
             y.copy(months = {
-              if(y.months.exists(_.month==month)) {
-                for(m <- y.months) yield {
-                  if(m.month==month) {
+              if (y.months.exists(_.month==month)) {
+                for (m <- y.months) yield {
+                  if (m.month==month) {
                     m.copy(days = inputDay ::: m.days)
                   } else m
                 }
@@ -200,8 +200,8 @@ def trainEmployee:Unit = {
   println("Which employee is training for a new ride?")
   println(employeeInfo.map(_.name).zipWithIndex.mkString(" "))
   val empNum = readInt()
-  employeeInfo = for((e,i) <- employeeInfo.zipWithIndex) yield {
-    if(i==empNum) {
+  employeeInfo = for ((e,i) <- employeeInfo.zipWithIndex) yield {
+    if (i==empNum) {
       val avail = rideInfo.map(_.name).diff(e.rides)
       println("Which rides should be added? (Enter space separated numbers.)")
       println(avail.zipWithIndex.mkString(" "))
@@ -244,10 +244,10 @@ do {
           val year = yearText.toInt
           val month = monthText.toInt
           val y = years.filter(_.year==year)
-          if(y.isEmpty) "Year not found."
+          if (y.isEmpty) "Year not found."
           else {
             val m = y.head.months.filter(_.month==month)
-            if(m.isEmpty) "Month not found."
+            if (m.isEmpty) "Month not found."
             else {
               rankEmployees(m.head.days).mkString("\n")
             }
@@ -255,7 +255,7 @@ do {
         case Array(yearText) =>
           val year = yearText.toInt
           val y = years.filter(_.year==year)
-          if(y.isEmpty) "Year not found."
+          if (y.isEmpty) "Year not found."
           else {
             rankEmployees(y.head.months.flatMap(_.days)).mkString("\n")
           }
@@ -263,7 +263,7 @@ do {
       })
     case _ =>
   }
-} while(input!=7)
+} while (input!=7)
 
 XML.save(args(0), <themeParkData>
   {years.map(yearToXML)}

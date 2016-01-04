@@ -3,14 +3,14 @@ def bubbleSort(lst:List[Double]):List[Double] = {
     case Nil => (false, lst)
     case h::Nil => (false, lst)
     case h1::h2::t =>
-      if(h1 <= h2) {
+      if (h1 <= h2) {
         val (swap, rest) = swapper(h2::t)
         (swap, h1 :: rest)
       } else (true, h2 :: swapper(h1::t)._2)
   }
 
   val (swap, swapped) = swapper(lst)
-  if(swap) bubbleSort(swapped)
+  if (swap) bubbleSort(swapped)
   else swapped
 }
 
@@ -20,7 +20,7 @@ def minSort(lst:List[Double]):List[Double] = {
     case h::Nil => (h, Nil)
     case h::t =>
       val (min, rest) = findAndRemoveMin(t)
-      if(h < min) (h, min::rest) else (min, h::rest)
+      if (h < min) (h, min::rest) else (min, h::rest)
   }
 
   lst match {
@@ -35,7 +35,7 @@ def minSort(lst:List[Double]):List[Double] = {
 def insertionSort(lst:List[Double]):List[Double] = {
   def insert(x:Double, sorted:List[Double]):List[Double] = sorted match {
     case Nil => x::Nil
-    case h::t => if(x < h) x::sorted else h::insert(x, t)
+    case h::t => if (x < h) x::sorted else h::insert(x, t)
   }
 
   def helper(sorted:List[Double], unsorted:List[Double]):List[Double] = unsorted match {

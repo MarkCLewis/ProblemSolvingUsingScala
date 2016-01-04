@@ -8,7 +8,7 @@ def individualCost(cooler:Boolean, waterPark:Boolean): Double = {
 
 println("How many people are in your group? (1-4)")
 val numPeople = readInt()
-if(numPeople<1 || numPeople>4) {
+if (numPeople<1 || numPeople>4) {
   println("This script can not handle "+numPeople+" people.")
 } else {
   println("Is the group bringing a cooler? (Y/N)")
@@ -16,8 +16,8 @@ if(numPeople<1 || numPeople>4) {
   println("Will they be going to the water park? (Y/N)")
   val waterPark = readLine()=="Y"
   val totalCost = individualCost(cooler,waterPark) +
-    (if(numPeople>1) individualCost(cooler,waterPark) else 0) +
-    (if(numPeople>2) individualCost(cooler,waterPark) else 0) +
-    (if(numPeople>3) individualCost(cooler,waterPark) else 0)
+    (if (numPeople>1) individualCost(cooler,waterPark) else 0) +
+    (if (numPeople>2) individualCost(cooler,waterPark) else 0) +
+    (if (numPeople>3) individualCost(cooler,waterPark) else 0)
   println("The group cost is $"+totalCost+".")
 }

@@ -22,7 +22,7 @@ val app = new JFXApp {
       splitPane.items += scrollPane
       splitPane.items += rightArea
       val accordion = new Accordion
-      for(i <- 1 to 10) {
+      for (i <- 1 to 10) {
         val titledPane = new TitledPane
         titledPane.text = "Title Pane "+i
         titledPane.content = new Button("Button "+i)

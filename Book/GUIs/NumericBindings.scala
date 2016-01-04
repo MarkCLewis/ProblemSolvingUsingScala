@@ -40,8 +40,8 @@ val app = new JFXApp {
 
       content = List(label, xSlider, ySlider, sizeSlider, scroll, rectangle)
 
-      label.layoutX <== (scene.width-label.width)/2
-      label.layoutY <== (scene.height-label.height)/2
+      label.layoutX <== (width-label.width)/2
+      label.layoutY <== (height-label.height)/2
       rectangle.layoutX <== xSlider.value*6
       rectangle.layoutY <== ySlider.value+40
       rectangle.width <== (sizeSlider.value*2)+10

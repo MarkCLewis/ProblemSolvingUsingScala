@@ -1,11 +1,11 @@
 def entryCost(age:Int, cooler:Boolean, waterPark:Boolean):Double = {
-  (if(age < 13 || age > 65) 20 else 35) +
-  (if(cooler) 5 else 0) +
-  (if(waterPark) 10 else 0)
+  (if (age < 13 || age > 65) 20 else 35) +
+  (if (cooler) 5 else 0) +
+  (if (waterPark) 10 else 0)
 }
 
 def individualAdding(num:Int, cooler:Boolean, waterPark:Boolean):Double = {
-  if(num > 0) {
+  if (num > 0) {
     println("What is the person’s age?")
     val age = readInt()
     entryCost(age, cooler, waterPark)+individualAdding(num-1, false, waterPark)
@@ -25,7 +25,7 @@ def groupSizeCost():(Int,Double) = {
 def doAdmission():(Int,Int,Double) = {
   println("Is there another group for the day? (Y/N)")
   val another = readLine()
-  if(another == "Y") {
+  if (another == "Y") {
     val (people, cost) = groupSizeCost()
     val (morePeople, moreGroups, moreCost) = doAdmission()
     (people+morePeople, 1+moreGroups, cost+moreCost)

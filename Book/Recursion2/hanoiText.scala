@@ -1,4 +1,4 @@
-val num = if(args.length>0) args(0).toInt else 7
+val num = if (args.length>0) args(0).toInt else 7
 val pegs = Array(List.tabulate(num)(i => i+2), List[Int](), List[Int]())
 
 def moveDisk(from:Int,to:Int):Unit = {
@@ -8,7 +8,7 @@ def moveDisk(from:Int,to:Int):Unit = {
 }
 
 def moveNDisks(n:Int,from:Int,to:Int):Unit = {
-    if(n==1) {
+    if (n==1) {
         moveDisk(from, to)
     } else {
         val other = 3-from-to

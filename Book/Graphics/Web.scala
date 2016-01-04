@@ -13,7 +13,7 @@ val app = new JFXApp {
       val urlField = new TextField
       val webView = new WebView
       webView.engine.load("http://www.scala-lang.org")
-      urlField.text = webView.location.apply
+      urlField.text = webView.location.value
 
       val borderPane = new BorderPane
       borderPane.top = urlField
@@ -22,9 +22,9 @@ val app = new JFXApp {
       root = borderPane
 
       urlField.onAction = (ae:ActionEvent) => {
-        webView.engine.load(urlField.text.apply)
+        webView.engine.load(urlField.text.value)
       }
-      webView.location.onChange(urlField.text = webView.location.apply)
+      webView.location.onChange(urlField.text = webView.location.value)
     }
   }
 }

@@ -46,9 +46,9 @@ val app = new JFXApp {
         "1 packet")), "Toast the poptarts ...\nor don't."))
 
       val recipeList = new ListView(recipes.map(_.name))
-      recipeList.selectionModel.apply.selectedIndex.onChange {
-        val index = recipeList.selectionModel.apply.selectedIndex.apply
-        if(index>=0) setFields(recipes(index))
+      recipeList.selectionModel.value.selectedIndex.onChange {
+        val index = recipeList.selectionModel.value.selectedIndex.value
+        if (index>=0) setFields(recipes(index))
       }
 
       // Ingredients stuff
@@ -76,35 +76,35 @@ val app = new JFXApp {
       GridPane.setConstraints(ingredientNameField,4,0)
       ingredientsGrid.children += amountField
       GridPane.setConstraints(amountField,4,2)
-      ingredientsList.selectionModel.apply.selectedItem.onChange {
-        val recipeIndex = recipeList.selectionModel.apply.selectedIndex.apply
-        val ingredientIndex = ingredientsList.selectionModel.apply.selectedIndex.apply
-        if(recipeIndex>=0 && ingredientIndex>=0) {
+      ingredientsList.selectionModel.value.selectedItem.onChange {
+        val recipeIndex = recipeList.selectionModel.value.selectedIndex.value
+        val ingredientIndex = ingredientsList.selectionModel.value.selectedIndex.value
+        if (recipeIndex>=0 && ingredientIndex>=0) {
           ingredientNameField.text = recipes(recipeIndex).ingredients(ingredientIndex).name
           amountField.text = recipes(recipeIndex).ingredients(ingredientIndex).amount
         }
       }
       ingredientNameField.text.onChange {
-        val newName = ingredientNameField.text.apply
+        val newName = ingredientNameField.text.value
         alterSelectedIngredient(i => i.copy(name = newName))
-        val ingredientIndex = ingredientsList.selectionModel.apply.selectedIndex.apply
-        if(ingredientIndex>=0) ingredientsList.items.apply(ingredientIndex) = newName
+        val ingredientIndex = ingredientsList.selectionModel.value.selectedIndex.value
+        if (ingredientIndex>=0) ingredientsList.items.value(ingredientIndex) = newName
       }
       amountField.text.onChange {
-        alterSelectedIngredient(i => i.copy(amount = amountField.text.apply))
+        alterSelectedIngredient(i => i.copy(amount = amountField.text.value))
       }
 
       // Directions
       val directionsArea = new TextArea
       directionsArea.text.onChange {
-        val recipeIndex = recipeList.selectionModel.apply.selectedIndex.apply
-        if(recipeIndex>=0) {
-          recipes(recipeIndex) = recipes(recipeIndex).copy(directions = directionsArea.text.apply)
+        val recipeIndex = recipeList.selectionModel.value.selectedIndex.value
+        if (recipeIndex>=0) {
+          recipes(recipeIndex) = recipes(recipeIndex).copy(directions = directionsArea.text.value)
         }
       }
 
       val splitPane = new SplitPane
-      splitPane.orientation = scalafx.geometry.Orientation.VERTICAL
+      splitPane.orientation = scalafx.geometry.Orientation.Vertical
       splitPane.items += ingredientsGrid
       splitPane.items += directionsArea
 
@@ -119,7 +119,7 @@ val app = new JFXApp {
       def openFile:Unit = {
         val chooser = new FileChooser
         val selected = chooser.showOpenDialog(stage)
-        if(selected!=null) {
+        if (selected!=null) {
           val src = io.Source.fromFile(selected)
           val lines = src.getLines
           recipes = Array.fill(lines.next.toInt)(Recipe(
@@ -128,8 +128,8 @@ val app = new JFXApp {
               {
                 var dir = ""
                 var line = lines.next
-                while(line!=".") {
-                  dir += (if(dir.isEmpty) "" else "\n")+line
+                while (line!=".") {
+                  dir += (if (dir.isEmpty) "" else "\n")+line
                   line = lines.next
                 }
                 dir
@@ -137,7 +137,7 @@ val app = new JFXApp {
           ))
           src.close()
           recipeList.items = ObservableBuffer(recipes.map(_.name):_*)
-          recipeList.selectionModel.apply.selectFirst
+          recipeList.selectionModel.value.selectFirst
           setFields(recipes.head)
         }
       }
@@ -145,13 +145,13 @@ val app = new JFXApp {
       def saveFile:Unit = {
         val chooser = new FileChooser
         val selected = chooser.showSaveDialog(stage)
-        if(selected!=null) {
+        if (selected!=null) {
           val pw = new PrintWriter(selected)
           pw.println(recipes.length)
-          for(r <- recipes) {
+          for (r <- recipes) {
             pw.println(r.name)
             pw.println(r.ingredients.length)
-            for(ing <- r.ingredients) {
+            for (ing <- r.ingredients) {
               pw.println(ing.name)
               pw.println(ing.amount)
             }
@@ -171,38 +171,38 @@ val app = new JFXApp {
           recipes = recipes :+ Recipe(name,
             List(Ingredient("ingredient","amount")),"Directions")
           recipeList.items = ObservableBuffer(recipes.map(_.name):_*)
-          recipeList.selectionModel.apply.clearAndSelect(recipes.length-1)
+          recipeList.selectionModel.value.clearAndSelect(recipes.length-1)
           setFields(recipes.last)
         }
       }
 
       def removeRecipe:Unit = {
-        if(!recipeList.selectionModel.apply.selectedItems.isEmpty) {
-          recipes = recipes.patch(recipeList.selectionModel.apply.selectedIndex.apply,Nil,1)
-          if(recipes.isEmpty) {
+        if (!recipeList.selectionModel.value.selectedItems.isEmpty) {
+          recipes = recipes.patch(recipeList.selectionModel.value.selectedIndex.value,Nil,1)
+          if (recipes.isEmpty) {
             recipes = Array(Recipe("New recipe",
                 List(Ingredient("ingredient","amount")),"Directions"))
           }
           recipeList.items = ObservableBuffer(recipes.map(_.name):_*)
-          recipeList.selectionModel.apply.clearAndSelect(0)
+          recipeList.selectionModel.value.clearAndSelect(0)
           setFields(recipes.head)
         }
       }
 
       def addIngredient:Unit = {
-        val recipeIndex = recipeList.selectionModel.apply.selectedIndex.apply
-        if(recipeIndex>=0) {
+        val recipeIndex = recipeList.selectionModel.value.selectedIndex.value
+        if (recipeIndex>=0) {
           val newIngr = Ingredient("Stuff", "Some")
           recipes(recipeIndex) = recipes(recipeIndex).copy(
             ingredients = recipes(recipeIndex).ingredients :+ newIngr)
-          ingredientsList.items.apply += newIngr.name
+          ingredientsList.items.value += newIngr.name
         }
       }
 
       def removeIngredient:Unit = {
-        val recipeIndex = recipeList.selectionModel.apply.selectedIndex.apply
-        val ingredientIndex = ingredientsList.selectionModel.apply.selectedIndex.apply
-        if(recipeIndex>=0 && ingredientIndex>=0) {
+        val recipeIndex = recipeList.selectionModel.value.selectedIndex.value
+        val ingredientIndex = ingredientsList.selectionModel.value.selectedIndex.value
+        if (recipeIndex>=0 && ingredientIndex>=0) {
           recipes(recipeIndex) = recipes(recipeIndex).copy(ingredients =
             recipes(recipeIndex).ingredients.patch(ingredientIndex,Nil,1))
           setFields(recipes(recipeIndex))
@@ -210,17 +210,17 @@ val app = new JFXApp {
       }
 
       def setFields(r:Recipe):Unit = {
-        ingredientsList.items.apply.clear
-				ingredientsList.items.apply ++= r.ingredients.map(_.name)
+        ingredientsList.items.value.clear
+        ingredientsList.items.value ++= r.ingredients.map(_.name)
         directionsArea.text = r.directions
         ingredientNameField.text = ""
         amountField.text = ""
       }
 
       def alterSelectedIngredient(diff: Ingredient => Ingredient):Unit = {
-        val recipeIndex = recipeList.selectionModel.apply.selectedIndex.apply
-        val ingredientIndex = ingredientsList.selectionModel.apply.selectedIndex.apply
-        if(recipeIndex>=0 && ingredientIndex>=0) {
+        val recipeIndex = recipeList.selectionModel.value.selectedIndex.value
+        val ingredientIndex = ingredientsList.selectionModel.value.selectedIndex.value
+        if (recipeIndex>=0 && ingredientIndex>=0) {
           val newIngredient = diff(recipes(recipeIndex).ingredients(ingredientIndex))
           val newRecipe = recipes(recipeIndex).copy(ingredients =
             recipes(recipeIndex).ingredients.updated(ingredientIndex,

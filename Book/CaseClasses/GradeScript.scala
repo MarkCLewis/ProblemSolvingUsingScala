@@ -8,11 +8,11 @@ case class Student(name:String, assignments:List[Double], tests:List[Double],
 case class Section(students:Array[Student])
 
 def classAverage(s:Student):Double = {
-  val assnAve = if(s.assignments.isEmpty) 0.0
+  val assnAve = if (s.assignments.isEmpty) 0.0
     else s.assignments.sum/s.assignments.length
-  val quizAve = if(s.quizzes.length<2) 0.0
+  val quizAve = if (s.quizzes.length<2) 0.0
     else (s.quizzes.sum-s.quizzes.min)/(s.quizzes.length-1)
-  val testAve = if(s.tests.isEmpty) 0.0
+  val testAve = if (s.tests.isEmpty) 0.0
     else s.tests.sum/s.tests.length
   0.5*assnAve + 0.3*testAve + 0.2*quizAve
 }
@@ -30,7 +30,7 @@ def createSection:(String,Section) = {
 def saveSection(fileName:String, section:Section):Unit = {
   val pw = new PrintWriter(fileName)
   pw.println(section.students.length)
-  for(s <- section.students) {
+  for (s <- section.students) {
     pw.println(s.name)
     pw.println(s.assignments.mkString(" "))
     pw.println(s.tests.mkString(" "))
@@ -53,7 +53,7 @@ def loadSection(fileName:String):(String,Section) = {
 }
 
 def addTest(section:Section):Unit = {
-  for(i <- 0 until section.students.length) {
+  for (i <- 0 until section.students.length) {
     println("Enter the grade for "+section.students(i).name+".")
     section.students(i) = section.students(i).
       copy(tests=readInt()::section.students(i).tests)
@@ -61,7 +61,7 @@ def addTest(section:Section):Unit = {
 } 
  
 def addAssignment(section:Section):Unit = {
-  for(i <- 0 until section.students.length) {
+  for (i <- 0 until section.students.length) {
     println("Enter the grade for "+section.students(i).name+".")
     section.students(i) = section.students(i).
       copy(assignments=readInt()::section.students(i).assignments)
@@ -69,7 +69,7 @@ def addAssignment(section:Section):Unit = {
 } 
 
 def addQuiz(section:Section):Unit = {
-  for(i <- 0 until section.students.length) {
+  for (i <- 0 until section.students.length) {
     println("Enter the grade for "+section.students(i).name+".")
     section.students(i) = section.students(i).
       copy(quizzes=readInt()::section.students(i).quizzes)
@@ -77,15 +77,15 @@ def addQuiz(section:Section):Unit = {
 } 
 
 def printAverages(section:Section):Unit = {
-  for(s <- section.students) {
+  for (s <- section.students) {
     println(s.name)
-    val assnAve = if(s.assignments.isEmpty) 0.0
+    val assnAve = if (s.assignments.isEmpty) 0.0
       else s.assignments.sum/s.assignments.length
     println(s.assignments.mkString("Assignments:",", "," = "+assnAve))
-    val quizAve = if(s.quizzes.length<2) 0.0
+    val quizAve = if (s.quizzes.length<2) 0.0
       else (s.quizzes.sum-s.quizzes.min)/(s.quizzes.length-1)
     println(s.quizzes.mkString("Quizzes:",", "," = "+quizAve))
-    val testAve = if(s.tests.isEmpty) 0.0
+    val testAve = if (s.tests.isEmpty) 0.0
       else s.tests.sum/s.tests.length
     println(s.tests.mkString("Tests:",", "," = "+testAve))
     println("Average = "+(0.5*assnAve+0.3*testAve+0.2*quizAve))
@@ -114,10 +114,10 @@ def mainMenu(section:Section):Unit = {
       case 5 => println("Goodbye!")
       case _ => println("Invalid option. Try again.")
     }
-  } while(option!=5)
+  } while (option!=5)
 } 
 
-val (fileName, section) = if(args.length<1) createSection
+val (fileName, section) = if (args.length<1) createSection
   else loadSection(args(0))
 mainMenu(section)
 saveSection(fileName, section)

@@ -24,8 +24,8 @@ val app = new JFXApp {
 
       content = tree
 
-      tree.selectionModel.apply.selectedItem.onChange(
-        println("Selected " + tree.selectionModel.apply.getSelectedItems)
+      tree.selectionModel.value.selectedItem.onChange(
+        println("Selected " + tree.selectionModel.value.selectedItem.value)
       )
     }
   }

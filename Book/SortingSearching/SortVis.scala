@@ -9,13 +9,13 @@ import scalafx.event.ActionEvent
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-val numToSort = if(args.length>0) args(0).toInt else 300
+val numToSort = if (args.length>0) args(0).toInt else 300
 val drawHeight = 300
 
 def renderValues(gc:GraphicsContext, a:Array[Double], i:Int, min:Int):Unit = {
   gc.clearRect(0, 0, a.length, drawHeight)
   gc.stroke = Color.Black
-  for(j <- a.indices) {
+  for (j <- a.indices) {
     gc.strokeLine(j,drawHeight*(1.0-a(j)),j,drawHeight)
   }
   gc.stroke = Color.Green
@@ -25,9 +25,9 @@ def renderValues(gc:GraphicsContext, a:Array[Double], i:Int, min:Int):Unit = {
 }
 
 def bubbleSortVis(gc:GraphicsContext, a:Array[Double], delay:Int) = {
-  for(j <- 0 until a.length-1) {
-    for(i <- 0 until a.length-1-j) {
-      if(a(i) > a(i+1)) {
+  for (j <- 0 until a.length-1) {
+    for (i <- 0 until a.length-1-j) {
+      if (a(i) > a(i+1)) {
         val tmp = a(i)
         a(i) = a(i+1)
         a(i+1) = tmp
@@ -39,14 +39,14 @@ def bubbleSortVis(gc:GraphicsContext, a:Array[Double], delay:Int) = {
 }
 
 def minSortVis(gc:GraphicsContext, a:Array[Double], delay:Int):Unit = {
-  for(j <- 0 until a.length-1) {
+  for (j <- 0 until a.length-1) {
     var min = j
-    for(i <- j+1 until a.length) {
-      if(a(i) < a(min)) min = i
+    for (i <- j+1 until a.length) {
+      if (a(i) < a(min)) min = i
       Platform.runLater(renderValues(gc, a, i, min))
       Thread.sleep(delay)
     }
-    if(min != j) {
+    if (min != j) {
       val tmp = a(j)
       a(j) = a(min)
       a(min) = tmp
@@ -55,10 +55,10 @@ def minSortVis(gc:GraphicsContext, a:Array[Double], delay:Int):Unit = {
 }
 
 def insertionSortVis(gc:GraphicsContext, a:Array[Double], delay:Int):Unit = {
-  for(j <- 1 until a.length) {
+  for (j <- 1 until a.length) {
     var i = j-1
     val tmp = a(j)
-    while(i >= 0 && a(i) > tmp) {
+    while (i >= 0 && a(i) > tmp) {
       a(i+1) = a(i)
       i -= 1
       Platform.runLater(renderValues(gc, a, i, -1))

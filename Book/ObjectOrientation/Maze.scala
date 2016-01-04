@@ -8,9 +8,10 @@ class Maze {
   private var count = 0
   private var nextFruitType = 0
 
-  init()
+  initMap()
+  initContents()
 
-  private def init():Unit = {
+  private def initMap():Unit = {
     cells = Array(Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
                   Array(0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0),
                   Array(0,2,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,2,0),
@@ -32,6 +33,9 @@ class Maze {
                   Array(0,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0),
                   Array(0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0),
                   Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
+  }
+
+  private def initContents():Unit = {
     _player = new PacMan(9, 15, -1)
     _ghosts = List(new Ghost(9, 7, 1, 0, Color.Red),
                    new Ghost(8, 9, 1, -50, Color.Cyan),
@@ -61,7 +65,7 @@ class Maze {
     // Update moving stuff
     player.update(this)
     if (player.dying) {
-      if (player.animationCount > 10) init()
+      if (player.animationCount > 10) initContents()
       0
     } else {
       ghosts.foreach(_.update(this))

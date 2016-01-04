@@ -24,7 +24,7 @@ val app = new JFXApp {
       path2.elements += HLineTo(175)
       path2.elements += VLineTo(75)
       path2.elements += CubicCurveTo(0,175,250,175,75,75)
-      path2.fillRule = FillRule.EVEN_ODD
+      path2.fillRule = FillRule.EvenOdd
       path2.fill = Color.Blue
 
       val path3 = new Path
@@ -33,7 +33,7 @@ val app = new JFXApp {
       path3.elements += HLineTo(375)
       path3.elements += VLineTo(75)
       path3.elements += CubicCurveTo(200,175,450,175,275,75)
-      path3.fillRule = FillRule.NON_ZERO
+      path3.fillRule = FillRule.NonZero
       path3.fill = Color.Cyan
 
       content = List(path, path2, path3)

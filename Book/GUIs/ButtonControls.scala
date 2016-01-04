@@ -64,33 +64,33 @@ val app = new JFXApp {
       }
 
       cb1.onAction = (e:ActionEvent) => {
-        label.text = "Check Box 1 is " + cb1.selected.apply
+        label.text = "Check Box 1 is " + cb1.selected.value
       }
       cb2.onAction = (e:ActionEvent) => {
-        label.text = "Check Box 2 is " + cb2.selected.apply
+        label.text = "Check Box 2 is " + cb2.selected.value
       }
 
       rb1.onAction = (e:ActionEvent) => {
-        label.text = "Radio Button 1 is " + rb1.selected.apply
+        label.text = "Radio Button 1 is " + rb1.selected.value
       }
       rb2.onAction = (e:ActionEvent) => {
-        label.text = "Radio Button 2 is " + rb2.selected.apply
+        label.text = "Radio Button 2 is " + rb2.selected.value
       }
       rb3.onAction = (e:ActionEvent) => {
-        label.text = "Radio Button 3 is " + rb3.selected.apply
+        label.text = "Radio Button 3 is " + rb3.selected.value
       }
-      rb1.selected.onChange(println("Radio button 1 is " + rb1.selected.apply))
+      rb1.selected.onChange(println("Radio button 1 is " + rb1.selected.value))
 
       tb1.onAction = (e:ActionEvent) => {
-        label.text = "Toggle Button 1 is " + tb1.selected.apply
+        label.text = "Toggle Button 1 is " + tb1.selected.value
       }
       tb2.onAction = (e:ActionEvent) => {
-        label.text = "Toggle Button 2 is " + tb2.selected.apply
+        label.text = "Toggle Button 2 is " + tb2.selected.value
       }
       tb3.onAction = (e:ActionEvent) => {
-        label.text = "Toggle Button 3 is " + tb3.selected.apply
+        label.text = "Toggle Button 3 is " + tb3.selected.value
       }
-      tb1.selected.onChange(println("Toggle button 1 is " + tb1.selected.apply))
+      tb1.selected.onChange(println("Toggle button 1 is " + tb1.selected.value))
     }
   }
 }

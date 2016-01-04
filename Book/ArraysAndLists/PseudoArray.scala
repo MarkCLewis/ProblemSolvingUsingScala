@@ -24,14 +24,14 @@ def pull(i:Int):Int = i match {
 }
 
 def inputValues(i:Int):Unit = {
-  if(i<howMany) {
+  if (i<howMany) {
     store(i, readInt)
     inputValues(i+1)
   }
 }
 
 def sumValues(i:Int):Int = {
-  if(i<howMany) pull(i)+sumValues(i+1) else 0
+  if (i<howMany) pull(i)+sumValues(i+1) else 0
 }
 
 println(s"Enter $howMany values.")

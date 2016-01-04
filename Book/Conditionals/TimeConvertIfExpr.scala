@@ -1,7 +1,7 @@
 import io.StdIn._
 print("Enter the number of seconds. ")
 val totalSeconds = readInt()
-val response = if(totalSeconds > 0) {
+val response = if (totalSeconds > 0) {
   val displaySeconds = totalSeconds%60
   val totalMinutes = totalSeconds/60 
   val displayMinutes = totalMinutes%60 

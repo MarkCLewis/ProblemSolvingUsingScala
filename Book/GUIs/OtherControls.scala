@@ -42,7 +42,7 @@ val app = new JFXApp {
       val separator = new Separator
       separator.layoutX = 250
       separator.layoutY = 0
-      separator.orientation = Orientation.VERTICAL
+      separator.orientation = Orientation.Vertical
       separator.prefHeight = 300
 
       val slider = new Slider(0,10,0)
@@ -57,19 +57,19 @@ val app = new JFXApp {
       content = List(progress, scroll, scrollLabel, separator, slider, toolBar, sliderLabel)
 
       advButton.onAction = (e:ActionEvent) => {
-        progress.progress = progress.progress.apply + 0.05 min 1.0 max 0.0
+        progress.progress = progress.progress.value + 0.05 min 1.0 max 0.0
       }
 
       decButton.onAction = (e:ActionEvent) => {
-        progress.progress = progress.progress.apply - 0.05 min 1.0 max 0.0
+        progress.progress = progress.progress.value - 0.05 min 1.0 max 0.0
       }
 
       scroll.value.onChange {
-        scrollLabel.text = "Scroll bar = " + scroll.value.apply
+        scrollLabel.text = "Scroll bar = " + scroll.value.value
       }
 
       slider.value.onChange {
-        sliderLabel.text = "Slider = " + slider.value.apply
+        sliderLabel.text = "Slider = " + slider.value.value
       }
     }
   }
